@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SellerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/home', [App\Http\Controllers\LandingPageController::class, 'show']);
+
+Route::prefix('dashboard')->group(function(){
+    Route::resource('seller', SellerController::class);
 });
