@@ -69,7 +69,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'rol_id' => 3,
+            'rol_id' => array_key_exists('rol_id', $data) ? $data['rol_id'] : 3,
             'name' => $data['name'],
             'lastname' => $data['lastname'],
             'email' => $data['email'],
