@@ -1,4 +1,4 @@
-@extends('administrator.master')
+@extends('seller.master')
 @section('content')
     <a href="{{ route('product.create') }}" class="btn btn-success btn-small mb-3">Crear producto</a>
     <h6>Productos</h6>
@@ -16,24 +16,26 @@
         </thead>
         <tbody>
             @foreach($products as $product)
-                <tr>
-                    <td scope="row">{{ $product -> id }}</td>
-                    <td>{{ $product -> product_name }}</td>
-                    <td>{{ $product -> description }}</td>
-                    <td>{{ $product -> price }}</td>
-                    <td>
-                        @foreach($sellers as $seller)
-                            {{ $product->seller_id == $seller->id ? $seller->name : ''}}
-                        @endforeach
-                    </td>
-                    <td>{{ $product -> created_at }}</td>
-                    <td>
-                        <a href="{{ route('product.edit', $product -> id) }}" class="btn btn-info btn-sm">Editar</a>
-                        <a href="{{ route('product.show', $product -> id) }}" class="btn btn-success btn-sm">Ver</a>
-                        <button data-id="{{ $product->id }}" class="btn btn-danger btn-sm"
-                            data-toggle='modal' data-target="#ModalDelete">Eliminar</button>
-                    </td>
-                </tr>
+                @if($product->seller_id == auth()->user()->id)
+                    <tr>
+                        <td scope="row">{{ $product -> id }}</td>
+                        <td>{{ $product -> product_name }}</td>
+                        <td>{{ $product -> description }}</td>
+                        <td>{{ $product -> price }}</td>
+                        <td>
+                            @foreach($sellers as $seller)
+                                {{ $product->seller_id == $seller->id ? $seller->name : ''}}
+                            @endforeach
+                        </td>
+                        <td>{{ $product -> created_at }}</td>
+                        <td>
+                            <a href="{{ route('product.edit', $product -> id) }}" class="btn btn-info btn-sm">Editar</a>
+                            <a href="{{ route('product.show', $product -> id) }}" class="btn btn-success btn-sm">Ver</a>
+                            <button data-id="{{ $product->id }}" class="btn btn-danger btn-sm"
+                                data-toggle='modal' data-target="#ModalDelete">Eliminar</button>
+                        </td>
+                    </tr>
+                @endif
             @endforeach
         </tbody>
     </table>

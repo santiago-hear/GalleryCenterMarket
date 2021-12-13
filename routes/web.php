@@ -22,9 +22,13 @@ Route::get('/', function () {
 });
 
 Route::prefix('administrator')->group(function() {
-    Route::resource('category', CategoryController::class);
-    Route::resource('product', ProductController::class);
-    Route::resource('user', RegisterController::class);
+    Route::resource('category', CategoryController::class)->middleware(['auth','administrator']);
+    Route::resource('product', ProductController::class)->middleware(['auth','administrator']);
+    Route::resource('user', RegisterController::class)->middleware(['auth','administrator']);
+});
+
+Route::prefix('seller')->group(function() {
+    Route::resource('product', ProductController::class)->middleware(['auth','seller']);
 });
 
 Auth::routes();
