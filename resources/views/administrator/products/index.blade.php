@@ -31,7 +31,7 @@
                         <a href="{{ route('product.edit', $product -> id) }}" class="btn btn-info btn-sm">Editar</a>
                         <a href="{{ route('product.show', $product -> id) }}" class="btn btn-success btn-sm">Ver</a>
                         <button data-id="{{ $product->id }}" class="btn btn-danger btn-sm"
-                            data-toggle='modal' data-target="#ModalDelete">Eliminar</button>
+                        data-bs-toggle='modal' data-bs-target="#ModalDelete">Eliminar</button>
                     </td>
                 </tr>
             @endforeach
@@ -44,15 +44,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="ModalDeleteLabel"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <div class="modal-body">
                 ¿Estás seguro que deseas eliminar el producto?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <form id="deletePost" action="{{ route('product.destroy',0) }}" data-action="{{ route('product.destroy',0) }}" method="POST">
                     @method('DELETE')
                     @csrf
@@ -73,7 +72,7 @@
             console.log(action)
             $('#deletePost').attr('action', action)
             var modal = $(this)
-            modal.find('.modal-title').text('Vas a eliminar la publicación ' + id)
+            modal.find('.modal-title').text('Vas a eliminar el producto ' + id)
         })
     }
     

@@ -1,8 +1,8 @@
-@extends('administrator.master')
+@extends('seller.master')
 @section('content')
     <h6>Editar producto</h6>
-    <form action="{{ route('product.update', $product->id) }}" method="POST">
+    <form action="{{ route('products.update', $product->id) }}" method="POST">
         @method('PUT')
-        @include('administrator.products._form')
+        @include('seller.products._form')
     </form>
 @endsection

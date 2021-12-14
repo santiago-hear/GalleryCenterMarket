@@ -91,8 +91,8 @@
         </select>
     </div>
     <div class="col-md-6">
-        <label for="status" class="form-label">{{ __('Rol') }}</label>
-        <select id="status" name="status" class="form-select">
+        <label for="rol_id" class="form-label">{{ __('Rol') }}</label>
+        <select id="rol_id" name="rol_id" class="form-select">
             <option selected disabled>Seleccionar...</option>
             @foreach($rols as $rol)
                 <option {{ $user->rol_id == $rol->id ? 'selected="selected"':'' }} value="{{ $rol->id }}">{{ $rol->rol }}</option>
@@ -100,7 +100,7 @@
         </select>
     </div>
     <div class="col-12">
-        <button type="submit" class="btn btn-success">{{ __('Regisar Usuario') }}</button>
+        <button type="submit" class="btn btn-success">{{ __('Registrar Usuario') }}</button>
     </div>
 </div>
 

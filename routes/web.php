@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ProductSellerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,7 +29,7 @@ Route::prefix('administrator')->group(function() {
 });
 
 Route::prefix('seller')->group(function() {
-    Route::resource('product', ProductController::class)->middleware(['auth','seller']);
+    Route::resource('products', ProductSellerController::class)->middleware(['auth','seller']);
 });
 
 Auth::routes();

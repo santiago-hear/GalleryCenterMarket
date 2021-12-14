@@ -52,6 +52,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /*
     public function updateStatus($status){
         tap($this, function ($user) use($status) {
             $user->status = $status;
@@ -65,6 +66,7 @@ class User extends Authenticatable
     public function getStatusAttribute($status){
         return new $status($this);
     }
+    */
 
     public function rol(){
         return $this->belongsTo(Rol::class);

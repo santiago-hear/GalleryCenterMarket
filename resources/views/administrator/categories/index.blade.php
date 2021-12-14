@@ -42,7 +42,7 @@
                 ¿Estás seguro que deseas eliminar la categoría?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <form id="deleteCategory" action="{{ route('category.destroy',0) }}" data-action="{{ route('category.destroy',0) }}" method="POST">
                     @method('DELETE')
                     @csrf

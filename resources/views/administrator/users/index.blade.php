@@ -35,7 +35,7 @@
                         <a href="{{ route('user.edit', $user -> id) }}" class="btn btn-info btn-sm">Editar</a>
                         <a href="{{ route('user.show', $user -> id) }}" class="btn btn-success btn-sm">Ver</a>
                         <button data-id="{{ $user->id }}" class="btn btn-danger btn-sm"
-                            data-toggle='modal' data-target="#ModalDelete">Eliminar</button>
+                        data-bs-toggle='modal' data-bs-target="#ModalDelete">Eliminar</button>
                     </td>
                 </tr>
             @endforeach
@@ -48,15 +48,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="ModalDeleteLabel"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 ¿Estás seguro que deseas eliminar el usuario?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <form id="deletePost" action="{{ route('user.destroy',0) }}" data-action="{{ route('user.destroy',0) }}" method="POST">
                     @method('DELETE')
                     @csrf

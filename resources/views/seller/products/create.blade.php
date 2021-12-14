@@ -1,7 +1,7 @@
-@extends('administrator.master')
+@extends('seller.master')
 @section('content')
     <h6>Crear producto</h6>
-    <form action="{{ route('product.store') }}" method="POST">
-        @include('administrator.products._form')
+    <form action="{{ route('products.store') }}" method="POST">
+        @include('seller.products._form')
     </form>
 @endsection

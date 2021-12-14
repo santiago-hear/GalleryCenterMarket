@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
+use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
-use App\Models\User;
 
-class ProductController extends Controller
+class ProductSellerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,7 +19,7 @@ class ProductController extends Controller
     {
         $products = Product::orderBy('id', 'ASC')->paginate(10);
         $sellers = User::all()->where("rol_id",'==', '2');
-        return view('administrator.products.index', ['products' => $products, 'sellers' => $sellers]);
+        return view('seller.products.index', ['products' => $products, 'sellers' => $sellers]);
     }
 
     /**
@@ -30,7 +31,8 @@ class ProductController extends Controller
     {
         $categories = Category::pluck('id', 'category_name');
         $sellers = User::all()->where("rol_id",'==', '2');
-        return view('administrator.products.create', ['product' => new Product(), 'categories' => $categories, 'sellers' => $sellers]);
+        return view('seller.products.create', ['product' => new Product(), 'categories' => $categories, 'sellers' => $sellers]);
+
     }
 
     /**
@@ -55,7 +57,7 @@ class ProductController extends Controller
     {
         $categories = Category::pluck('id', 'category_name');
         $sellers = User::all()->where("rol_id",'==', '2');
-        return view('administrator.products.show', ['product' => $product, 'categories' => $categories, 'sellers' => $sellers]);
+        return view('seller.products.show', ['product' => $product, 'categories' => $categories, 'sellers' => $sellers]);
     }
 
     /**
@@ -68,7 +70,7 @@ class ProductController extends Controller
     {
         $categories = Category::pluck('id', 'category_name');
         $sellers = User::all()->where("rol_id",'==', '2');
-        return view('administrator.products.edit', ['product' => $product, 'categories' => $categories, 'sellers' => $sellers]);
+        return view('seller.products.edit', ['product' => $product, 'categories' => $categories, 'sellers' => $sellers]);
     }
 
     /**

@@ -1,6 +1,6 @@
 @extends('seller.master')
 @section('content')
-    <a href="{{ route('product.create') }}" class="btn btn-success btn-small mb-3">Crear producto</a>
+    <a href="{{ route('products.create') }}" class="btn btn-success btn-small mb-3">Crear producto</a>
     <h6>Productos</h6>
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
@@ -29,10 +29,10 @@
                         </td>
                         <td>{{ $product -> created_at }}</td>
                         <td>
-                            <a href="{{ route('product.edit', $product -> id) }}" class="btn btn-info btn-sm">Editar</a>
-                            <a href="{{ route('product.show', $product -> id) }}" class="btn btn-success btn-sm">Ver</a>
+                            <a href="{{ route('products.edit', $product -> id) }}" class="btn btn-info btn-sm">Editar</a>
+                            <a href="{{ route('products.show', $product -> id) }}" class="btn btn-success btn-sm">Ver</a>
                             <button data-id="{{ $product->id }}" class="btn btn-danger btn-sm"
-                                data-toggle='modal' data-target="#ModalDelete">Eliminar</button>
+                                data-bs-toggle='modal' data-bs-target="#ModalDelete">Eliminar</button>
                         </td>
                     </tr>
                 @endif
@@ -46,7 +46,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="ModalDeleteLabel"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -54,8 +54,8 @@
                 ¿Estás seguro que deseas eliminar el producto?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <form id="deletePost" action="{{ route('product.destroy',0) }}" data-action="{{ route('product.destroy',0) }}" method="POST">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form id="deletePost" action="{{ route('products.destroy',0) }}" data-action="{{ route('products.destroy',0) }}" method="POST">
                     @method('DELETE')
                     @csrf
                     <button type="submit" class="btn btn-primary">Aceptar</button>
@@ -75,7 +75,7 @@
             console.log(action)
             $('#deletePost').attr('action', action)
             var modal = $(this)
-            modal.find('.modal-title').text('Vas a eliminar la publicación ' + id)
+            modal.find('.modal-title').text('Vas a eliminar el producto ' + id)
         })
     }
     

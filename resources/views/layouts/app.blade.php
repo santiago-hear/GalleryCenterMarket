@@ -33,7 +33,20 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-
+                        @auth
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav">
+                                @if(auth()->user()->rol->key == 'Admin')
+                                <a class="nav-link" href="{{ route('category.index') }}">Categorías</a>
+                                <a class="nav-link" href="{{ route('user.index') }}">Usuarios</a>
+                                <a class="nav-link" href="{{ route('product.index') }}">Productos</a>
+                                @endif
+                                @if(auth()->user()->rol->key == 'Seller')
+                                <a class="nav-link" href="{{ route('products.index') }}">Productos</a>
+                                @endif
+                            </div>
+                        </div>
+                        @endauth
                     </ul>
 
                     <!-- Right Side Of Navbar -->

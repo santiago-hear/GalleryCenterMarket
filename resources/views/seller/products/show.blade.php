@@ -1,4 +1,4 @@
-@extends('administrator.master')
+@extends('seller.master')
 @section('content')
     <div class="form-group">
         <input disabled class="form-control" type="text" name="product_name" id="product_name" 
@@ -25,10 +25,7 @@
     {{-- lista desplegable comerciantes --}}
     <div class="form-group">
         <select disabled class="form-control" name="seller_id" id="seller_id" aria-label="Default">
-            <option selected disabled>Seleccionar...</option>
-            @foreach($sellers as $seller)
-                <option {{ $product->seller_id == $seller->id ? 'selected="selected"':'' }} value="{{ $id }}">{{ $seller->name }}</option>
-            @endforeach
+            <option selected value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option>
         </select>
     </div>
     <a class="btn btn-danger" href="{{ URL::previous() }}">Cancelar</a>
