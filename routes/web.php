@@ -1,7 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\Auth\RegisterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,8 +19,18 @@ use App\Http\Controllers\SellerController;
 |
 */
 
-Route::get('/home', [App\Http\Controllers\LandingPageController::class, 'show']);
-
-Route::prefix('dashboard')->group(function(){
-    Route::resource('seller', SellerController::class);
+Route::get('/', function () {
+    return view('welcome');
 });
+
+Route::prefix('administrator')->group(function() {
+    Route::resource('category', CategoryController::class);
+    Route::resource('product', ProductController::class);
+    Route::resource('user', RegisterController::class);
+    Route::resource('seller', SellerController::class);
+    Route::resource('landing', LandingPageController::class);
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

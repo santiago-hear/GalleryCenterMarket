@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class LandingPageController extends Controller
 {
 
-    public function show()
+    public function index()
     {
         return view('landing');
     }

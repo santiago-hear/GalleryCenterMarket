@@ -9,6 +9,15 @@ class Seller extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'phoneNumber',
+        'address',
+        'identificationType',
+        'identificationNumber',
+        'sector'
+    ];
+    
     public function Rol()
     {
         return $this->belongsTo(Rol::class);

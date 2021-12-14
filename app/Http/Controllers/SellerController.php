@@ -15,7 +15,8 @@ class SellerController extends Controller
      */
     public function index()
     {
-        return view('dashboard.sellers.index');
+        $sellers = Seller::orderBy('id', 'ASC')->paginate(10);
+        return view('administrator.sellers.index', ['sellers' => $sellers]);
     }
 
     /**
@@ -25,7 +26,7 @@ class SellerController extends Controller
      */
     public function create()
     {
-        return view('dashboard.sellers.create');
+        return view('administrator.sellers.create');
     }
 
     /**
@@ -48,7 +49,7 @@ class SellerController extends Controller
      */
     public function show(Seller $seller)
     {
-        //
+        return view('administrator.sellers.show', ['seller' => $seller]);
     }
 
     /**
@@ -59,7 +60,7 @@ class SellerController extends Controller
      */
     public function edit(Seller $seller)
     {
-        //
+        return view('administrator.sellers.edit', ['seller' => $seller]);
     }
 
     /**
@@ -71,7 +72,8 @@ class SellerController extends Controller
      */
     public function update(Request $request, Seller $seller)
     {
-        //
+        $seller -> update($request -> validated());
+        return back()->with('status','Comerciante actualizado con éxito');
     }
 
     /**
@@ -82,6 +84,7 @@ class SellerController extends Controller
      */
     public function destroy(Seller $seller)
     {
-        //
+        $seller -> delete();
+        return back()->with('status','Comerciante eliminado con éxito');
     }
 }
