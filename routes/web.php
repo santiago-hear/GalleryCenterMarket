@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -24,7 +25,7 @@ Route::get('/', function () {
 Route::prefix('administrator')->group(function() {
     Route::resource('category', CategoryController::class)->middleware(['auth','administrator']);
     Route::resource('product', ProductController::class)->middleware(['auth','administrator']);
-    Route::resource('user', RegisterController::class)->middleware(['auth','administrator']);
+    Route::resource('user', UserController::class)->middleware(['auth','administrator']);
 });
 
 Route::prefix('seller')->group(function() {

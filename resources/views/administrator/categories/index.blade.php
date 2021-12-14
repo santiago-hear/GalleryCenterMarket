@@ -22,8 +22,8 @@
                     <td>
                         <a href="{{ route('category.edit', $category -> id) }}" class="btn btn-info btn-sm">Editar</a>
                         <a href="{{ route('category.show', $category -> id) }}" class="btn btn-success btn-sm">Ver</a>
-                        <button data-id="{{ $category ->id }}" class="btn btn-danger btn-sm"
-                            data-toggle='modal' data-target="#ModalDelete">Eliminar</button>
+                        <button data-id="{{ $category->id }}" class="btn btn-danger btn-sm"
+                            data-bs-toggle='modal' data-bs-target="#ModalDelete">Eliminar</button>
                     </td>
                 </tr>
             @endforeach
@@ -36,15 +36,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="ModalDeleteLabel"></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 ¿Estás seguro que deseas eliminar la categoría?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <form id="deleteCategory" action="{{ route('category.destroy',0) }}" data-action="{{ route('category.destroy',0) }}" method="POST">
                     @method('DELETE')
                     @csrf
@@ -68,5 +66,4 @@
             modal.find('.modal-title').text('Vas a eliminar la categoría ' + id)
         })
     }
-    
 </script>

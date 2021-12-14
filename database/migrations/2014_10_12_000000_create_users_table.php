@@ -24,6 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('address');
             $table->string('identification_type');
             $table->string('identification_number')->unique();
+            $table->enum('status', ['active','inactive'])->nullable()->default('active');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

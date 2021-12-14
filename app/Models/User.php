@@ -13,6 +13,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+
+
     /**
      * The attributes that are mass assignable.
      *
@@ -27,6 +29,7 @@ class User extends Authenticatable
         'address',
         'identification_type',
         'identification_number',
+        'status',
         'password',
     ];
 
@@ -48,6 +51,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function updateStatus($status){
+        tap($this, function ($user) use($status) {
+            $user->status = $status;
+        })->save();
+    }
+
+    public function changeStatus(){
+        $this->status->handle();
+    }
+
+    public function getStatusAttribute($status){
+        return new $status($this);
+    }
 
     public function rol(){
         return $this->belongsTo(Rol::class);
