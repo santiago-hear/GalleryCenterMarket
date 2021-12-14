@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Rol;
 use Illuminate\Http\Request;
+use App\Http\Requests\RolRequest;
 
 class RolController extends Controller
 {
@@ -14,7 +15,8 @@ class RolController extends Controller
      */
     public function index()
     {
-        //
+        $rols = Rol::orderBy('id', 'ASC')->paginate(10);
+        return view('dashboard.rols.index', ['rols' => $rols]);
     }
 
     /**
@@ -24,7 +26,7 @@ class RolController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.rols.create');
     }
 
     /**
@@ -33,9 +35,10 @@ class RolController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RolRequest $request)
     {
-        //
+        Rol::create($request -> validated());
+        return back()->with('status','Rol creado con éxito');
     }
 
     /**
@@ -46,7 +49,7 @@ class RolController extends Controller
      */
     public function show(Rol $rol)
     {
-        //
+        return view('dashboard.rols.show', ['rol' => $rol]);
     }
 
     /**
@@ -57,7 +60,8 @@ class RolController extends Controller
      */
     public function edit(Rol $rol)
     {
-        //
+        $rols = Rol::pluck('id', 'rol');
+        return view('dashboard.rols.edit', ['rol' => $rol, 'rols' => $rols]);
     }
 
     /**
@@ -67,9 +71,10 @@ class RolController extends Controller
      * @param  \App\Models\Rol  $rol
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Rol $rol)
+    public function update(RolRequest $request, Rol $rol)
     {
-        //
+        $rol -> update($request -> validated());
+        return back()->with('status','Rol actualizado con éxito');
     }
 
     /**
@@ -80,6 +85,7 @@ class RolController extends Controller
      */
     public function destroy(Rol $rol)
     {
-        //
+        $rol -> delete();
+        return back()->with('status','Rol eliminado con éxito');
     }
 }

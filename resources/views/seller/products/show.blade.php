@@ -1,7 +1,6 @@
 @extends('administrator.master')
 @section('content')
 <div class="row g-3">
-    <div>
         <div class="row g-0">
           <div class="col-md-7">
             <img src="{{ asset('imagenes/producto1.png') }}" class="img-fluid rounded-start">
@@ -17,7 +16,6 @@
             </div>
           </div>
         </div>
-    </div>
 </div>
 <div>
     <a class="btn btn-danger my-2" href="{{ URL::previous() }}">Volver</a>

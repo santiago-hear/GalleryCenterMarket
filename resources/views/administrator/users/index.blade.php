@@ -1,45 +1,48 @@
 @extends('administrator.master')
 @section('content')
-    <a href="{{ route('product.create') }}" class="btn btn-success btn-small mb-3">Crear producto</a>
-    <h6>Productos</h6>
+    <a href="{{ route('user.create') }}" class="btn btn-success btn-small mb-3">Crear usuario</a>
+    <h6>Usuarios</h6>
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>Código</th>
-                <th>Producto</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Comerciante</th>
-                <th>Fecha</th>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Celular</th>
+                <th>Dirección</th>
+                <th>Identificación</th>
+                <th>Rol</th>
+                <th>Estado</th>
                 <th>Opciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($products as $product)
+            @foreach($users as $user)
                 <tr>
-                    <td scope="row">{{ $product -> id }}</td>
-                    <td>{{ $product -> product_name }}</td>
-                    <td>{{ $product -> description }}</td>
-                    <td>{{ $product -> price }}</td>
+                    <td scope="row">{{ $user -> id }}</td>
+                    <td>{{ $user -> name.' '.$user -> lastname }}</td>
+                    <td>{{ $user -> email }}</td>
+                    <td>{{ $user -> phone_number }}</td>
+                    <td>{{ $user -> address }}</td>
+                    <td>{{ $user -> identification_number }}</td>
                     <td>
-                        @foreach($sellers as $seller)
-                            {{ $product->seller_id == $seller->id ? $seller->name : ''}}
+                        @foreach($rols as $rol)
+                            {{ $user->rol_id == $rol->id ? $rol->key : ''}}
                         @endforeach
                     </td>
-                    <td>{{ $product -> created_at }}</td>
+                    <td>{{ $user -> status }}</td>
                     <td>
-                        <a href="{{ route('product.edit', $product -> id) }}" class="btn btn-info btn-sm">Editar</a>
-                        <a href="{{ route('product.show', $product -> id) }}" class="btn btn-success btn-sm">Ver</a>
-                        <button data-id="{{ $product->id }}" class="btn btn-danger btn-sm"
+                        <a href="{{ route('user.edit', $user -> id) }}" class="btn btn-info btn-sm">Editar</a>
+                        <a href="{{ route('user.show', $user -> id) }}" class="btn btn-success btn-sm">Ver</a>
+                        <button data-id="{{ $user->id }}" class="btn btn-danger btn-sm"
                             data-toggle='modal' data-target="#ModalDelete">Eliminar</button>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-    
 @endsection
-{{ $products->links() }}
+{{ $users->links() }}
 <div class="modal fade" id="ModalDelete" tabindex="-1" aria-labelledby="ModalDeleteLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -50,11 +53,11 @@
                 </button>
             </div>
             <div class="modal-body">
-                ¿Estás seguro que deseas eliminar el producto?
+                ¿Estás seguro que deseas eliminar el usuario?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <form id="deletePost" action="{{ route('product.destroy',0) }}" data-action="{{ route('product.destroy',0) }}" method="POST">
+                <form id="deletePost" action="{{ route('user.destroy',0) }}" data-action="{{ route('user.destroy',0) }}" method="POST">
                     @method('DELETE')
                     @csrf
                     <button type="submit" class="btn btn-primary">Aceptar</button>
@@ -74,7 +77,7 @@
             console.log(action)
             $('#deletePost').attr('action', action)
             var modal = $(this)
-            modal.find('.modal-title').text('Vas a eliminar la publicación ' + id)
+            modal.find('.modal-title').text('Vas a eliminar el usuario ' + id)
         })
     }
     

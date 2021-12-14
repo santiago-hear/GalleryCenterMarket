@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductRequest;
+use App\Models\User;
 
 class ProductController extends Controller
 {
@@ -17,7 +18,13 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::orderBy('id', 'ASC')->paginate(10);
-        return view('administrator.products.index', ['products' => $products]);
+        $sellers = User::all()->where("rol_id",'==', '2');
+        // if(auth()->user()->rol->key == "Admin") {
+            return view('administrator.products.index', ['products' => $products, 'sellers' => $sellers]);
+        // }
+        // if(auth()->user()->rol->key == "Seller") {
+        //     return view('seller.products.index', ['products' => $products, 'sellers' => $sellers]);
+        // }
     }
 
     /**
@@ -28,7 +35,8 @@ class ProductController extends Controller
     public function create()
     {
         $categories = Category::pluck('id', 'category_name');
-        return view('administrator.products.create', ['product' => new Product(), 'categories' => $categories]);
+        $sellers = User::all()->where("rol_id",'==', '2');
+        return view('administrator.products.create', ['product' => new Product(), 'categories' => $categories, 'sellers' => $sellers]);
     }
 
     /**
@@ -40,7 +48,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         Product::create($request -> validated());
-        return back()->with('status','Publicación genereada con éxito');
+        return back()->with('status','Producto genereado con éxito');
     }
 
     /**
@@ -51,7 +59,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        return view('administrator.products.show', ['product' => $product]);
+        $categories = Category::pluck('id', 'category_name');
+        $sellers = User::all()->where("rol_id",'==', '2');
+        return view('administrator.products.show', ['product' => $product, 'categories' => $categories, 'sellers' => $sellers]);
     }
 
     /**
@@ -63,7 +73,8 @@ class ProductController extends Controller
     public function edit(Product $product)
     {
         $categories = Category::pluck('id', 'category_name');
-        return view('administrator.products.edit', ['product' => $product, 'categories' => $categories]);
+        $sellers = User::all()->where("rol_id",'==', '2');
+        return view('administrator.products.edit', ['product' => $product, 'categories' => $categories, 'sellers' => $sellers]);
     }
 
     /**

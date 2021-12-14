@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SellerController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LandingPageController;
@@ -26,11 +27,12 @@ Route::get('/', function () {
 Route::prefix('administrator')->group(function() {
     Route::resource('category', CategoryController::class);
     Route::resource('product', ProductController::class);
-    Route::resource('user', RegisterController::class);
+    Route::resource('user', UserController::class);
     Route::resource('seller', SellerController::class);
-    Route::resource('landing', LandingPageController::class);
 });
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('landing', LandingPageController::class);
