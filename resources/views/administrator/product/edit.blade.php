@@ -3,6 +3,6 @@
     <h6>Editar producto</h6>
     <form action="{{ route('product.update', $product->id) }}" method="POST">
         @method('PUT')
-        @include('administrator.products._form')
+        @include('administrator.product._form')
     </form>
 @endsection

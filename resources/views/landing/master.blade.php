@@ -8,10 +8,10 @@
     <title>GalleryCenterMarket</title>
 </head>
 <body>
-    @include('administrator.structure.navbar')
+    @include('landing.structure.navbar')
     <div class="container">
         <div class="container-fluid">
-            @include('administrator.structure.status')
+            @include('landing.structure.status')
             @yield('content')
         </div>
     </div>

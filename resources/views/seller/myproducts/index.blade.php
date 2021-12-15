@@ -1,6 +1,6 @@
 @extends('seller.master')
 @section('content')
-    <a href="{{ route('products.create') }}" class="btn btn-success btn-small mb-3">Crear producto</a>
+    <a href="{{ route('myproducts.create') }}" class="btn btn-success btn-small mb-3">Crear producto</a>
     <h6>Productos</h6>
     <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
@@ -29,8 +29,8 @@
                         </td>
                         <td>{{ $product -> created_at }}</td>
                         <td>
-                            <a href="{{ route('products.edit', $product -> id) }}" class="btn btn-info btn-sm">Editar</a>
-                            <a href="{{ route('products.show', $product -> id) }}" class="btn btn-success btn-sm">Ver</a>
+                            <a href="{{ route('myproducts.edit', $product -> id) }}" class="btn btn-info btn-sm">Editar</a>
+                            <a href="{{ route('myproducts.show', $product -> id) }}" class="btn btn-success btn-sm">Ver</a>
                             <button data-id="{{ $product->id }}" class="btn btn-danger btn-sm"
                                 data-bs-toggle='modal' data-bs-target="#ModalDelete">Eliminar</button>
                         </td>
@@ -39,6 +39,7 @@
             @endforeach
         </tbody>
     </table>
+
 @endsection
 {{ $products->links() }}
 <div class="modal fade" id="ModalDelete" tabindex="-1" aria-labelledby="ModalDeleteLabel" aria-hidden="true">
@@ -55,7 +56,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <form id="deletePost" action="{{ route('products.destroy',0) }}" data-action="{{ route('products.destroy',0) }}" method="POST">
+                <form id="deletePost" action="{{ route('myproducts.destroy',0) }}" data-action="{{ route('myproducts.destroy',0) }}" method="POST">
                     @method('DELETE')
                     @csrf
                     <button type="submit" class="btn btn-primary">Aceptar</button>

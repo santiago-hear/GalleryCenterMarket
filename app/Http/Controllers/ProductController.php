@@ -18,7 +18,7 @@ class ProductController extends Controller
     {
         $products = Product::orderBy('id', 'ASC')->paginate(10);
         $sellers = User::all()->where("rol_id",'==', '2');
-        return view('administrator.products.index', ['products' => $products, 'sellers' => $sellers]);
+        return view('administrator.product.index', ['products' => $products, 'sellers' => $sellers]);
     }
 
     /**
@@ -30,7 +30,7 @@ class ProductController extends Controller
     {
         $categories = Category::pluck('id', 'category_name');
         $sellers = User::all()->where("rol_id",'==', '2');
-        return view('administrator.products.create', ['product' => new Product(), 'categories' => $categories, 'sellers' => $sellers]);
+        return view('administrator.product.create', ['product' => new Product(), 'categories' => $categories, 'sellers' => $sellers]);
     }
 
     /**
@@ -42,7 +42,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         Product::create($request -> validated());
-        return back()->with('status','Publicación genereada con éxito');
+        return back()->with('status','Producto genereado con éxito');
     }
 
     /**
@@ -55,7 +55,7 @@ class ProductController extends Controller
     {
         $categories = Category::pluck('id', 'category_name');
         $sellers = User::all()->where("rol_id",'==', '2');
-        return view('administrator.products.show', ['product' => $product, 'categories' => $categories, 'sellers' => $sellers]);
+        return view('administrator.product.show', ['product' => $product, 'categories' => $categories, 'sellers' => $sellers]);
     }
 
     /**
@@ -68,7 +68,7 @@ class ProductController extends Controller
     {
         $categories = Category::pluck('id', 'category_name');
         $sellers = User::all()->where("rol_id",'==', '2');
-        return view('administrator.products.edit', ['product' => $product, 'categories' => $categories, 'sellers' => $sellers]);
+        return view('administrator.product.edit', ['product' => $product, 'categories' => $categories, 'sellers' => $sellers]);
     }
 
     /**

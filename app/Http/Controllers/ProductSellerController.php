@@ -19,7 +19,7 @@ class ProductSellerController extends Controller
     {
         $products = Product::orderBy('id', 'ASC')->paginate(10);
         $sellers = User::all()->where("rol_id",'==', '2');
-        return view('seller.products.index', ['products' => $products, 'sellers' => $sellers]);
+        return view('seller.myproducts.index', ['products' => $products, 'sellers' => $sellers]);
     }
 
     /**
@@ -31,7 +31,7 @@ class ProductSellerController extends Controller
     {
         $categories = Category::pluck('id', 'category_name');
         $sellers = User::all()->where("rol_id",'==', '2');
-        return view('seller.products.create', ['product' => new Product(), 'categories' => $categories, 'sellers' => $sellers]);
+        return view('seller.myproducts.create', ['product' => new Product(), 'categories' => $categories, 'sellers' => $sellers]);
 
     }
 
@@ -44,7 +44,7 @@ class ProductSellerController extends Controller
     public function store(ProductRequest $request)
     {
         Product::create($request -> validated());
-        return back()->with('status','Publicación genereada con éxito');
+        return back()->with('status','proucto genereado con éxito');
     }
 
     /**
@@ -57,7 +57,7 @@ class ProductSellerController extends Controller
     {
         $categories = Category::pluck('id', 'category_name');
         $sellers = User::all()->where("rol_id",'==', '2');
-        return view('seller.products.show', ['product' => $product, 'categories' => $categories, 'sellers' => $sellers]);
+        return view('seller.myproducts.show', ['product' => $product, 'categories' => $categories, 'sellers' => $sellers]);
     }
 
     /**
@@ -70,7 +70,7 @@ class ProductSellerController extends Controller
     {
         $categories = Category::pluck('id', 'category_name');
         $sellers = User::all()->where("rol_id",'==', '2');
-        return view('seller.products.edit', ['product' => $product, 'categories' => $categories, 'sellers' => $sellers]);
+        return view('seller.myproducts.edit', ['product' => $product, 'categories' => $categories, 'sellers' => $sellers]);
     }
 
     /**

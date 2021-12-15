@@ -12,7 +12,8 @@
           <ul class="navbar-nav me-auto">
               <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                   <div class="navbar-nav">
-                      <a class="nav-link" href="{{ route('myproducts.index') }}">Productos</a>
+                      <a class="nav-link" href="{{ route('products.index') }}">Productos</a>
+                      <a class="nav-link" href="{{ route('sellers.index') }}">Comerciantes</a>
                   </div>
               </div>
           </ul>

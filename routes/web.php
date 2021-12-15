@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StateController;
+use App\Http\Controllers\SellerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PatronesController;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\ProductSellerController;
@@ -29,9 +31,12 @@ Route::prefix('administrator')->group(function() {
 });
 
 Route::prefix('seller')->group(function() {
-    Route::resource('products', ProductSellerController::class)->middleware(['auth','seller']);
-    Route::resource('landing', LandingPageController::class);
+    Route::resource('myproducts', ProductSellerController::class)->middleware(['auth','seller']);
 });
+
+Route::resource('categories', CategoryController::class);
+Route::resource('products', LandingPageController::class);
+Route::resource('sellers', SellerController::class);
 
 Route::get('state', [PatronesController::class, 'state'])->name('patrones.state');
 Route::post('state/{user}', StateController::class)->name('state');
@@ -40,3 +45,5 @@ Route::post('state/{user}', StateController::class)->name('state');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('landing', LandingPageController::class);

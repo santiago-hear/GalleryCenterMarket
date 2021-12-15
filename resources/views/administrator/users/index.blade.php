@@ -14,7 +14,7 @@
                 <th>Rol</th>
                 <th>Estado</th>
                 <th>Opciones</th>
-                <th>Bloquear/Desbloquear</th>
+                <th>Lock/Unlock</th>
             </tr>
         </thead>
         <tbody>
@@ -35,10 +35,10 @@
                         {{ $user -> status }}
                     </td>
                     <td>
-                        <a href="{{ route('user.edit', $user -> id) }}" class="btn btn-info btn-sm">Editar</a>
-                        <a href="{{ route('user.show', $user -> id) }}" class="btn btn-success btn-sm">Ver</a>
-                        <button data-id="{{ $user->id }}" class="btn btn-danger btn-sm"
-                        data-bs-toggle='modal' data-bs-target="#ModalDelete">Eliminar</button>
+                        <a href="{{ route('user.edit', $user -> id) }}" class="btn btn-primary btn"><ion-icon name="create-outline"></ion-icon></a>
+                        <a href="{{ route('user.show', $user -> id) }}" class="btn btn-info btn"><ion-icon name="eye-outline"></ion-icon></a>
+                        <button data-id="{{ $user->id }}" class="btn btn-danger btn"
+                        data-bs-toggle='modal' data-bs-target="#ModalDelete"><ion-icon name="trash-outline"></ion-icon></button>
                     </td>
                     <td>
                         <form action="{{ route('state', $user) }}" method="POST">
@@ -46,10 +46,10 @@
                             @if ($estado = $user->status)
                                 <div>
                                     @if ($estado == 'locked')
-                                        <button class="btn btn-info btn-sm">Desbloquear</button>
+                                        <button class="btn btn-success btn"><ion-icon name="lock-open-outline"></ion-icon></button>
                                     @endif
                                     @if ($estado == 'unlocked')
-                                        <button class="btn btn-warning btn-sm">Bloquear</button>
+                                        <button class="btn btn-warning btn"><ion-icon name="lock-closed-outline"></ion-icon></button>
                                     @endif
                                 </div>
                             @endif

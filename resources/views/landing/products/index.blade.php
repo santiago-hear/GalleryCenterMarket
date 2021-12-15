@@ -1,4 +1,4 @@
-@extends('administrator.master')
+@extends('landing.master')
 @section('content')
     <a href="{{ route('product.create') }}" class="btn btn-success btn-small mb-3">Crear producto</a>
     <h6>Productos</h6>
@@ -37,20 +37,6 @@
             @endforeach
         </tbody>
     </table>
-
-    
-    <div class="row g-3">
-        @foreach($products as $product)
-        <div class="card col-sm-4">
-        <img src="../../imagenes/verduras.jpg" class="card-img-top" alt="...">
-        <div class="card-body text-center">
-          <h5 class="card-title"> {{ old('product_name', $product -> product_name) }} </h5>
-          <p class="card-text"> {{ old('description', $product -> description) }} </p>
-          <a href="{{ route('product.show', $product -> id) }}" class="btn btn-primary btn-sm">Ver</a>
-        </div>
-        </div>
-        @endforeach
-    </div>
     
 @endsection
 {{ $products->links() }}

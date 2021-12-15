@@ -1,5 +1,5 @@
 @csrf
-@include('administrator.structure.validation-error')
+@include('landing.structure.validation-error')
 <form>
     <div class="row g-3">
 
