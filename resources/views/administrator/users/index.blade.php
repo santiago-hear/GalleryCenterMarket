@@ -14,6 +14,7 @@
                 <th>Rol</th>
                 <th>Estado</th>
                 <th>Opciones</th>
+                <th>Bloquear/Desbloquear</th>
             </tr>
         </thead>
         <tbody>
@@ -30,12 +31,29 @@
                             {{ $user->rol_id == $rol->id ? $rol->key : ''}}
                         @endforeach
                     </td>
-                    <td>{{ $user -> status }}</td>
+                    <td>
+                        {{ $user -> status }}
+                    </td>
                     <td>
                         <a href="{{ route('user.edit', $user -> id) }}" class="btn btn-info btn-sm">Editar</a>
                         <a href="{{ route('user.show', $user -> id) }}" class="btn btn-success btn-sm">Ver</a>
                         <button data-id="{{ $user->id }}" class="btn btn-danger btn-sm"
                         data-bs-toggle='modal' data-bs-target="#ModalDelete">Eliminar</button>
+                    </td>
+                    <td>
+                        <form action="{{ route('state', $user) }}" method="POST">
+                            @csrf
+                            @if ($estado = $user->status)
+                                <div>
+                                    @if ($estado == 'locked')
+                                        <button class="btn btn-info btn-sm">Desbloquear</button>
+                                    @endif
+                                    @if ($estado == 'unlocked')
+                                        <button class="btn btn-warning btn-sm">Bloquear</button>
+                                    @endif
+                                </div>
+                            @endif
+                        </form>
                     </td>
                 </tr>
             @endforeach

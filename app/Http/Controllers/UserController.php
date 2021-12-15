@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Rol;
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
@@ -92,11 +91,5 @@ class UserController extends Controller
         $user -> delete();
         return back()->with('status','Usuario eliminado con éxito');
     }
-
-    public function __invoke(Request $request, User $user)
-    {
-        $user->changeStatus();
-
-        return response()->json(['status' => (string) $user->status]);
-    }
+    
 }

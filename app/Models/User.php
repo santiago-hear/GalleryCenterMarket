@@ -5,15 +5,12 @@ namespace App\Models;
 use App\Models\Rol;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
-
-
 
     /**
      * The attributes that are mass assignable.
@@ -52,22 +49,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /*
-    public function updateStatus($status){
-        tap($this, function ($user) use($status) {
-            $user->status = $status;
-        })->save();
+    protected static function booted()
+    {
+        static::created(function ($user) {
+            $user->update(['status' => \App\Models\Status\UnlockStatus::class]);
+        });
     }
 
-    public function changeStatus(){
+    public function changeStatus() : void
+    {
         $this->status->handle();
     }
 
-    public function getStatusAttribute($status){
+    public function getStatusAttribute($status)
+    {
         return new $status($this);
     }
-    */
-
+    
     public function rol(){
         return $this->belongsTo(Rol::class);
     }
