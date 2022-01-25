@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Rol;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Request;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class UserController extends Controller
 {
+    use ResetsPasswords;
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +34,7 @@ class UserController extends Controller
     public function create()
     {
         $rols = Rol::all();
-        return view('administrator.users.create', ['user' => new User(), 'rols' => $rols]);
+        return view('administrator.users.create', ['rols' => $rols]);
     }
 
     /**
@@ -37,9 +43,40 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        User::create($request -> validated());
+        $user = new User;
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'identification_type' => 'required',
+        ]);
+
+        // if fails redirects back with errors
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Fill user model
+        $user->fill([
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'identification_type' => $request->identification_type,
+            'identification_number' => $request->identification_number,
+            'password' => Hash::make($request->password),
+            'state' => $request->state,
+            'rol_id' => $request->rol_id,
+        ]);
+
+        // Save user to database
+        $user->save();
+
+        // Redirect to route
         return back()->with('status','Usuario creado con éxito');
     }
 
@@ -74,9 +111,38 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, User $user)
+    public function update(Request $request, User $user)
     {
-        $user -> update($request -> validated());
+        //$user -> update($request -> validated());
+
+        // Validate the data submitted by user
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'identification_type' => 'required',
+        ]);
+
+        // if fails redirects back with errors
+        if ($validator->fails()) {
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        // Fill user model
+        $user->fill([
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+            'identification_type' => $request->identification_type,
+            'identification_number' => $request->identification_number,
+            'rol_id' => $request->rol_id,
+        ]);
+
+        // Save user to database
+        $user->save();
+
+        // Redirect to route
         return back()->with('status','Usuario actualizado con éxito');
     }
 

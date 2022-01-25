@@ -1,16 +1,13 @@
-@extends('layouts.app')
-
+@extends('landing.master')
 @section('content')
-<div class="container">
+<div class="container-fluid my-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Inicar sesión') }}</div>
-
+                <div class="card-header">{{ __('Iniciar Sesión') }}</div>
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-
                         <div class="row mb-3">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Correo Electrónico') }}</label>
 
@@ -53,12 +50,12 @@
 
                         <div class="row mb-0">
                             <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-success">
                                     {{ __('Iniciar sesión') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a class="btn btn-link link-success" href="{{ route('password.request') }}">
                                         {{ __('¿Olvisdaste tu contraseña?') }}
                                     </a>
                                 @endif

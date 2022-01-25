@@ -75,7 +75,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'phone_number' => $data['phone_number'],
             'address' => $data['address'],
-            'status' => 'App\Models\Status\ActiveStatus',
+            'status' => 'App\Models\Status\UnlockStatus',
             'identification_type' => $data['identification_type'],
             'identification_number' => $data['identification_number'],
             'password' => Hash::make($data['password']),

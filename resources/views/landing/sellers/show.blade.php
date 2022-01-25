@@ -8,7 +8,8 @@
           </div>
           <div class="col-md-7">
             <div class="card-body">
-              <h2 class="card-title my-3">{{ old('name', $seller -> name) }} {{ old('lastname', $seller -> lastname) }}</h2>
+              <h2 class="card-title my-3">{{ $seller -> id }} </h2>
+              <h2 class="card-title my-3">{{ $seller -> name }} {{ $seller -> lastname }}</h2>
               <p class="h5 card-text my-3">Email: {{ old('email', $seller -> email) }}</p>
               <p class="h5 card-text my-3">Teléfono: {{ old('phone_number', $seller -> phone_number) }}</p>
               <p class="h5 card-text my-3">Dirección: {{ old('address', $seller -> address) }}</p>

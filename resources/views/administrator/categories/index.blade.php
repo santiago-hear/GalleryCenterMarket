@@ -20,10 +20,10 @@
                     <td>{{ $category -> category_description }}</td>
                     <td>{{ $category -> created_at }}</td>
                     <td>
-                        <a href="{{ route('category.edit', $category -> id) }}" class="btn btn-info btn-sm">Editar</a>
-                        <a href="{{ route('category.show', $category -> id) }}" class="btn btn-success btn-sm">Ver</a>
-                        <button data-id="{{ $category->id }}" class="btn btn-danger btn-sm"
-                            data-bs-toggle='modal' data-bs-target="#ModalDelete">Eliminar</button>
+                        <a href="{{ route('category.edit', $category -> id) }}" class="btn btn-info"><ion-icon name="create-outline"></ion-icon></a>
+                        <a href="{{ route('category.show', $category -> id) }}" class="btn btn-success"><ion-icon name="eye-outline"></ion-icon></a>
+                        <button data-id="{{ $category->id }}" data-name="{{ $category->category_name }}" class="btn btn-danger"
+                            data-bs-toggle='modal' data-bs-target="#ModalDelete"><ion-icon name="trash-outline"></ion-icon></button>
                     </td>
                 </tr>
             @endforeach
@@ -39,14 +39,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                ¿Estás seguro que deseas eliminar la categoría?
+                ¿Está seguro que desea eliminar la categoría?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <form id="deleteCategory" action="{{ route('category.destroy',0) }}" data-action="{{ route('category.destroy',0) }}" method="POST">
                     @method('DELETE')
                     @csrf
-                    <button type="submit" class="btn btn-primary">Aceptar</button>
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
                 </form>
             </div>
         </div>
@@ -58,12 +58,13 @@
             // Button that triggered the modal
             var button = $(event.relatedTarget)
             var id = button.data('id')
+            var name = button.data('name')
             action = $('#deleteCategory').attr('data-action').slice(0,-1)
             action += id
             console.log(action)
             $('#deleteCategory').attr('action', action)
             var modal = $(this)
-            modal.find('.modal-title').text('Vas a eliminar la categoría ' + id)
+            modal.find('.modal-title').text('Vas a eliminar la categoría "' + name + '"')
         })
     }
 </script>

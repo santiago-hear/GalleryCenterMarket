@@ -29,9 +29,7 @@
 </div>
 {{-- lista desplegable comerciantes --}}
 <div class="form-group">
-    <select class="form-control" name="seller_id" id="seller_id" aria-label="Default">
-        <option selected value="{{ auth()->user()->id }}">{{ auth()->user()->name }}</option>
-    </select>
+    <input type="text" name="seller_id" id="seller_id" hidden value="{{ auth()->user()->id }}">
 </div>
 <button type="submit" class="btn btn-success">Aceptar</button>
 <a class="btn btn-danger" href="{{ URL::previous() }}">Cancelar</a>

@@ -28,10 +28,10 @@
                     </td>
                     <td>{{ $product -> created_at }}</td>
                     <td>
-                        <a href="{{ route('product.edit', $product -> id) }}" class="btn btn-info btn-sm">Editar</a>
-                        <a href="{{ route('product.show', $product -> id) }}" class="btn btn-success btn-sm">Ver</a>
-                        <button data-id="{{ $product->id }}" class="btn btn-danger btn-sm"
-                        data-bs-toggle='modal' data-bs-target="#ModalDelete">Eliminar</button>
+                        <a href="{{ route('product.edit', $product -> id) }}" class="btn btn-info"><ion-icon name="create-outline"></ion-icon></a>
+                        <a href="{{ route('product.show', $product -> id) }}" class="btn btn-success"><ion-icon name="eye-outline"></ion-icon></a>
+                        <button data-id="{{ $product->id }}" data-name="{{ $product->product_name }}" class="btn btn-danger"
+                        data-bs-toggle='modal' data-bs-target="#ModalDelete"><ion-icon name="trash-outline"></ion-icon></button>
                     </td>
                 </tr>
             @endforeach
@@ -68,12 +68,13 @@
             // Button that triggered the modal
             var button = $(event.relatedTarget)
             var id = button.data('id')
+            var name = button.data('name')
             action = $('#deletePost').attr('data-action').slice(0,-1)
             action += id
             console.log(action)
             $('#deletePost').attr('action', action)
             var modal = $(this)
-            modal.find('.modal-title').text('Vas a eliminar el producto ' + id)
+            modal.find('.modal-title').text('Vas a eliminar el producto "' + name + '"')
         })
     }
     

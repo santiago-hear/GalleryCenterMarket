@@ -11286,3 +11286,17 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+.logo-image{
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-top: -6px;
+}
+
+.prueba {
+  width: 46px;
+  height: 46px;
+  background-color: black;
+}
